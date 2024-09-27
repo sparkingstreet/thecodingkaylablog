@@ -1,0 +1,97 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('blackandgoldsand.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px;
+}
+
+nav h1 {
+    font-size: 24px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li{
+    margin-left: 20px;
+}
+
+nav ul li a{
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+}
+.email-container {
+    max-width: 800px;
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.email-header {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.blog-title {
+    font-size: 28px;
+    color: #333;
+    margin: 0 0 10px;
+}
+
+.blog-date {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 20px;
+}
+
+.blog-technologies {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.blog-technologies span {
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+.blog-body {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fafafa;
+    line-height: 1.6;
+}
+
+footer {
+    text-align: center;
+    padding-top: 20px;
+    font-size: 12px;
+    color: #888;
+}
