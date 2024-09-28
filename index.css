@@ -52,37 +52,6 @@ nav ul li a:hover {
     
 }
 
-.mobile-menu-icon {
-    display: none;
-    font-size: 30px;
-    cursor: pointer;
-    color: limegreen;
-}
-
-@media only screen and (max-width: 768px) {
-    .nav-menu ul {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        background-color: #1e1e2f;
-        padding: 20px 0;
-    }
-
-    .nav-menu ul li {
-        margin: 10px 0;
-    }
-
-    .mobile-menu-icon {
-        display: block;
-    }
-}
-
-@media only screen and (max-width: 480px) {
-    .nav-menu ul li a {
-        font-size: 16px;
-    }
-}
-
 
 /*go to post section*/
 #go-to-post {
