@@ -8,6 +8,8 @@ body {
     justify-content: center;
     text-align: center;
     background-image: url('coderepeat.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
 /* Navigation */
