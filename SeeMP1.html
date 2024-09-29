@@ -10,14 +10,15 @@
         <header>
             <nav>
                 <ul>
-                    <li><a href="blogpage.html">previous page</a></li>
+                    <li><a href="blogpage.html">Back to blog list</a></li>
                     <li><a href="index.html">Home</a></li>
                 </ul>
             </nav>
         </header>
-
-        <div class="email-container">
-            <div class="email-header">
+        
+        <!--blog title-->
+        <div class="blog-container">
+            <div class="blog-header">
                 <h1 class="blog-title">My First Website: The Struggle Was Real</h1>
                 <p class="blog-date"> 9/27/2024 </p>
                 <p class="blog-technologies">tehcnologies used:
@@ -25,6 +26,7 @@
                     <span>CSS</span>
                 </p>
             </div>
+
             <!--blog content body in bordered box-->
             <div class="blog-body">
                 <p>
@@ -41,6 +43,18 @@
                 </p>
             </div>
 
+            <!--Comment section-->
+        <div class="comment-section">
+            <h2>Comment your own ideas below: </h2>
+            <form id="comment-form">
+                <textarea id="comment-input" placeholder="write a comment..." required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+            <div id="comments-container">
+                <!--Comments displayed here-->
+            </div>
+        </div>
+
             <!--footer-->
             <footer>
                 &copy; 2024 thecodingkayla.blog | All Rights Reserved
@@ -48,5 +62,48 @@
         </div>
             </div>
         </div>
+
+        <script>
+            document.getElementById('comment-form').addEventListener('submit', async function (event) {
+                event.preventDefault();
+
+                const commentInput = document.getElementById('comment-input');
+                const commenttext = commentInput.value.trim();
+
+                if (commenttext) {
+                    const response = await fetch('http://localhost:3000/comments', {
+                        method: 'POST',
+                        headers: {'Content-type': 'application/json'},
+                        body: JSON.stringify({ comment: commenttext})
+                    });
+
+                    if(response.ok) {
+                        commentInput.value= '';
+                        loadComments();
+                    } else {
+                        alert('falied to submit comment');
+                    }
+                }
+
+            });
+
+            //function to load comments from server
+            async function loadComments() {
+                const response = await fetch('http://localhost:3000/comments');
+                const comments = await response.json();
+
+                const commentsContainer = document.getElementById('comments-container');
+                commentsContainer.innerHTML= '';
+
+                comments.forEach(comment => {
+                    const commentDiv = document.createElement('div');
+                    commentDiv.classList.add('comment');
+                    commentDiv.textContent = comment.commenttext; 
+                    commentsContainer.appendChild(commentDiv);
+                });
+            }
+            //Load comments when the page is loaded
+            loadComments();
+        </script>
     </body>
 </html>
