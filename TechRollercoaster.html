@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>blog-1 title</title>
+        <title>Tech Rollercoaster</title>
         <link rel="stylesheet" href="smp1.css">
     </head>
     <body>
@@ -19,33 +19,42 @@
         <!--blog title-->
         <div class="blog-container">
             <div class="blog-header">
-                <h1 class="blog-title">My First Website: The Struggle Was Real</h1>
+                <h1 class="blog-title">Embracing the Tech Rollercoaster.</h1>
                 <p class="blog-date"> 9/27/2024 </p>
                 <p class="blog-technologies">tehcnologies used:
                     <span>Html</span>
-                    <span>CSS</span>
+                    <span>supabase</span>
+                    <span>git</span>
+                    <span>vercel</span>
+                    <span>JavaScript</span>
+                    <span>node.js</span>
                 </p>
             </div>
 
             <!--blog content body in bordered box-->
             <div class="blog-body">
                 <p>
-                    Let me tell you, getting my website up and running was no joke. The coding part felt like a breeze compared to all the behind-the-scenes setup.
-                    It took me days to figure it out, and there were so many moments when I was ready to throw in the towel. But instead, I pushed through, step by step, and somehow, it all started coming together.    
+                    As I sit here at my computer, I can't help but reflect on my journey in tech. Just when I think I've mastered one challenge, the next one seems to leap right out of nowhere, more daunting than the last.
+                    If you've visted my blog before, you might have noticed the new comment box below. Well, here's the kicker---it's not working! (haha!)
+                <p>
+                    It was functioning beautifully, and I was over the moon! But once I took it live, I hit a snag with getting my database online. College didn't quite prepare me for this;
+                    it focused heavily on coding, and my last lesson on servers feels like a distant memory from two years ago. Life has changed a lot since then--
+                    I've welcomed a baby and faced significant challenges that have left me feeling a bit scattered.
                 </p>
                 <p>
-                    After countless hours(and a few "why am i doing this" moments), I finally connected everything--my GitHub, my repositories, my site--and let me just say, the feeling of seeing it all live? Unreal. I might've actually jumped up and down when
-                    it worked.
+                    Sure, college provided solid foundation, but I wish I could access all the knowledge I've forgotten over the years, especially
+                    since I haven't been able to use it in my daily life. But here's the silver lining: I have a day off work tomorrow, and I plan to spend a good chunk
+                    of it tackling these database dilemmas.
                 </p>
-                <p>
-                    Now that everything is running smoothly, I'm starting to feel ready for some side work! Who knew setting up my first website would be this big of a roller coaster?
-                    There was a point where I seriously considered giving up coding altogehter. Funny how the same thing that almost made me quit has now become the thing that brings me so much joy--thanks to one little website.
+
+                <p>Isn't that what life often feels like? We solve one problem, only for another to emerge. Yet, in the midst of the frustration, there are valuable lessons and skills to be
+                    learned. Perhaps the next time I encounter a roadblock, I'll approach it with a more postive attitude, armed with the knowledge that I can persevere and get the job done.
                 </p>
             </div>
 
             <!--Comment section-->
         <div class="comment-section">
-            <h2>Comment your own ideas below: </h2>
+            <h2>Comment your own ideas below: (coming soon) </h2>
             <form id="comment-form">
                 <textarea id="comment-input" placeholder="write a comment..." required></textarea>
                 <button type="submit">Submit</button>
@@ -71,7 +80,7 @@
                 const commenttext = commentInput.value.trim();
 
                 if (commenttext) {
-                    const response = await fetch('https://thecodingkaylablog.vercel.app/comments', {
+                    const response = await fetch('http://localhost:3000/comments', {
                         method: 'POST',
                         headers: {'Content-type': 'application/json'},
                         body: JSON.stringify({ comment: commenttext})
@@ -89,7 +98,7 @@
 
             //function to load comments from server
             async function loadComments() {
-                const response = await fetch('https://thecodingkaylablog.vercel.app/comments');
+                const response = await fetch('http://localhost:3000/comments');
                 const comments = await response.json();
 
                 const commentsContainer = document.getElementById('comments-container');

@@ -1,58 +1,61 @@
 const express = require('express');
-const { createClient } = require('@supabase/supabase-js');
-const bodyParser = require('body-parser');  // Fixed 'required' to 'require'
-const cors = require('cors');
-
+const mysql = require('mysql2');
+const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
 
-// Middleware to parse JSON bodies
+//middleware to parse JSON bodies
 app.use(bodyParser.json());
-app.use(cors());
 
-//Initialize supabase client
-require('dotenv').config();
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
+//mysql connection
+const db = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'pEh1knBg@kdu8',
+    database: 'thecodingkaylacomments'
+});
 
+//connect to mysql
+db.connect((err) => {
+    if (err) {
+        console.error('Error connecting to MySQL: ', err);
+        return;
+    }
+    console.log('Connected to MySQL database');
+});
 
-// POST route to add a new comment
-app.post('/comments', async (req, res) => {
-    const { comment } = req.body;
+//post route to add a new comment
+app.post('/comments', (req, res) => {
+    const {comment} = req.body;
     if (!comment) {
-        return res.status(400).send({message: 'comment text required'});
+        return res.status(400).send({ message: 'Comment text is required'});
     }
 
-    //insert comment into supabase
-    const { data, error } = await supabase.from('comments')
-    .insert([{ commenttext: comment }]);
-
-    if (error) {
-        console.error('Error adding comment:', error);
-        return res.status(500).send({ message: 'Failed to add comment'});
-    }
-
-    res.status(201).send({ message: 'Comment added', id: data[0].id });
+    //sql query to insert the comment into the database
+    const sql = 'INSERT INTO comments (commenttext) VALUES (?)';
+    db.query(sql, [comment], (err, result) => {
+        if (err) {
+            console.error('Error adding comment:', err);
+            return res.status(500) .send({ message: 'Failed to add comment' 
+            });
+        }
+        res.status(201).send({message: 'comment added', id: result.instertId });
+    });  
 });
 
-
-// GET route to retrieve all comments
-app.get('/comments', async (req, res) => {
-    const { data, error } = await supabase
-    .from('comments')
-    .select('*')
-    .order('createdat', {ascending: false });
-
-    if(error) {
-        console.error('error fetching comments:', error);
-        return res.status(500).send({ message: 'Failed to retrieve comments'});
-    }
-
-    res.send(data);
+//get route to retrieve all comments
+app.get('/comments', (req, res) => {
+    const sql = 'SELECT * FROM comments ORDER BY createdat DESC';
+    db.query(sql, (err, results) => {
+        if(err) {
+            console.error('Error fetching comments:', err);
+            return res.status(500).send({ message: 'Failed to retrieve comments'});
+        }
+        res.send(resutls);
+    });
 });
 
-// Start the server
+//start server
 app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+    console.log(`server running on port ${port}`);
 });

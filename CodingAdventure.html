@@ -1,118 +1,210 @@
+
+
 <!DOCTYPE html>
+
 <html lang="en">
+
     <head>
+
         <meta charset="UTF-8">
+
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>blog-1 title</title>
+
+        <title>CodingAdventure</title>
+
         <link rel="stylesheet" href="smp1.css">
+
     </head>
+
     <body>
+
         <header>
+
             <nav>
+
                 <ul>
+
                     <li><a href="blogpage.html">Back to blog list</a></li>
+
                     <li><a href="index.html">Home</a></li>
+
                 </ul>
+
             </nav>
+
         </header>
+
         
+
         <!--blog title-->
+
         <div class="blog-container">
+
             <div class="blog-header">
-                <h1 class="blog-title">Embracing the Tech Rollercoaster.</h1>
-                <p class="blog-date"> 9/27/2024 </p>
+
+                <h1 class="blog-title">Welcome Back to the Coding Adventure!</h1>
+
+                <p class="blog-date"> 10/07/2024 </p>
+
                 <p class="blog-technologies">tehcnologies used:
+
                     <span>Html</span>
-                    <span>supabase</span>
-                    <span>git</span>
-                    <span>vercel</span>
+
+                    <span>CSS</span>
+
+                    <span></span>
+
+                    <span></span>
+
                     <span>JavaScript</span>
-                    <span>node.js</span>
+
+                    <span></span>
+
                 </p>
+
             </div>
 
             <!--blog content body in bordered box-->
+
             <div class="blog-body">
+
                 <p>
-                    As I sit here at my computer, I can't help but reflect on my journey in tech. Just when I think I've mastered one challenge, the next one seems to leap right out of nowhere, more daunting than the last.
-                    If you've visted my blog before, you might have noticed the new comment box below. Well, here's the kicker---it's not working! (haha!)
+                    Hey there, fellow coders! It’s been a wild ride lately, and I’m here to share a little about my journey. 
+                    Let’s be real—getting into the nitty-gritty of databases feels like trying to solve a puzzle without all the pieces. 
+                    While I can whip up HTML, CSS, and JavaScript with ease, diving into database management has been a bit of a struggle. 
+                    It seems like the simplest tasks often turn into the most challenging ones!     
                 <p>
-                    It was functioning beautifully, and I was over the moon! But once I took it live, I hit a snag with getting my database online. College didn't quite prepare me for this;
-                    it focused heavily on coding, and my last lesson on servers feels like a distant memory from two years ago. Life has changed a lot since then--
-                    I've welcomed a baby and faced significant challenges that have left me feeling a bit scattered.
-                </p>
-                <p>
-                    Sure, college provided solid foundation, but I wish I could access all the knowledge I've forgotten over the years, especially
-                    since I haven't been able to use it in my daily life. But here's the silver lining: I have a day off work tomorrow, and I plan to spend a good chunk
-                    of it tackling these database dilemmas.
+                    Right now, my comment section is still on the fritz because I’m wrestling with getting my databases live and connected to my website.
+                    It’s the same old song and dance around here, but I’m determined to push through. 
                 </p>
 
-                <p>Isn't that what life often feels like? We solve one problem, only for another to emerge. Yet, in the midst of the frustration, there are valuable lessons and skills to be
-                    learned. Perhaps the next time I encounter a roadblock, I'll approach it with a more postive attitude, armed with the knowledge that I can persevere and get the job done.
+                <p>
+                    Yes, I know—I’m still stuck on databases. Trust me, it’s equally frustrating for me. I’d love to talk about something else at this point, 
+                    but databases have taken over my life like a clingy cat that refuses to leave you alone. 
+                    I mean, honestly, who knew getting data to actually stay where it’s supposed to would be harder than sleep training  a newborn?
                 </p>
+
+                <p>As college has kicked back into gear, I find myself juggling my roles as a student, a mom, and an employee. 
+                    It’s a lot to handle, but I like to think of it as coding in real life: once you find the right code and hit your groove, everything becomes a little smoother. 
+                    And just like coding, I can only hope that it all gets a bit easier with time.
+                </p>
+
+                <p>
+                    To give myself a breather from the database dilemma, I’ve decided to step back and start a new project. 
+                    Sometimes you need to shift your focus and come back with a clear mind!
+                </p>
+                <p>
+                    I’ll keep you updated on my progress. Here’s to finding that perfect code—both in our projects and in life!
+                </p>
+
             </div>
 
             <!--Comment section-->
+
         <div class="comment-section">
-            <h2>Comment your own ideas below: </h2>
+
+            <h2>Comment your own ideas below: (coming soon) </h2>
+
             <form id="comment-form">
+
                 <textarea id="comment-input" placeholder="write a comment..." required></textarea>
+
                 <button type="submit">Submit</button>
+
             </form>
+
             <div id="comments-container">
+
                 <!--Comments displayed here-->
+
             </div>
+
         </div>
 
             <!--footer-->
+
             <footer>
+
                 &copy; 2024 thecodingkayla.blog | All Rights Reserved
+
             </footer>
+
         </div>
+
             </div>
+
         </div>
 
         <script>
+
             document.getElementById('comment-form').addEventListener('submit', async function (event) {
+
                 event.preventDefault();
 
                 const commentInput = document.getElementById('comment-input');
+
                 const commenttext = commentInput.value.trim();
 
                 if (commenttext) {
-                    const response = await fetch('https://thecodingkaylablog.vercel.app/comments', {
+
+                    const response = await fetch('http://localhost:3000/comments', {
+
                         method: 'POST',
+
                         headers: {'Content-type': 'application/json'},
+
                         body: JSON.stringify({ comment: commenttext})
+
                     });
 
                     if(response.ok) {
+
                         commentInput.value= '';
+
                         loadComments();
+
                     } else {
+
                         alert('falied to submit comment');
+
                     }
+
                 }
 
             });
 
             //function to load comments from server
+
             async function loadComments() {
-                const response = await fetch('https://thecodingkaylablog.vercel.app/comments');
+
+                const response = await fetch('http://localhost:3000/comments');
+
                 const comments = await response.json();
 
                 const commentsContainer = document.getElementById('comments-container');
+
                 commentsContainer.innerHTML= '';
 
                 comments.forEach(comment => {
+
                     const commentDiv = document.createElement('div');
+
                     commentDiv.classList.add('comment');
+
                     commentDiv.textContent = comment.commenttext; 
+
                     commentsContainer.appendChild(commentDiv);
+
                 });
+
             }
+
             //Load comments when the page is loaded
+
             loadComments();
+
         </script>
+
     </body>
+
 </html>
